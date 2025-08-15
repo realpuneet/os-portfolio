@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import Desktop from "./components/Desktop";
+import { WindowProvider } from "./context/WindowContext";
 
-const App = () => {
+export default function App() {
   return (
-    <div>App</div>
-  )
+    <WindowProvider>
+      <Desktop />
+    </WindowProvider>
+  );
 }
-
-export default App
