@@ -48,24 +48,23 @@ const actions = {
   }),
 };
 
-
-function windowsReducer(state, action){
-    const handler = actions[action.type];
-    if(!handler) return state;
-    return handler (state, action.payload);
+function windowsReducer(state, action) {
+  const handler = actions[action.type];
+  if (!handler) return state;
+  return handler(state, action.payload);
 }
 
-const windowContext = createContext();
+const WindowContext = createContext();
 
-export function WindowProvider({children}){
-    const [state, dispatch] = useReducer(windowsReducer, initialState);
-    return(
-        <windowContext.Provider value={{state, dispatch}}>
-            {children}
-        </windowContext.Provider>
-    )
+export function WindowProvider({ children }) {
+  const [state, dispatch] = useReducer(windowsReducer, initialState);
+  return (
+    <WindowContext.Provider value={{ state, dispatch }}>
+      {children}
+    </WindowContext.Provider>
+  );
 }
 
-export function useWindows(){
-    return useContext(windowContext);
+export function useWindows() {
+  return useContext(WindowContext);
 }
