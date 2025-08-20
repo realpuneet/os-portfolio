@@ -13,7 +13,7 @@ export function StartMenu({ closeMenu }) {
   };
 
   return (
-    <div className="absolute bottom-12 left-2 w-64 bg-gray-800 text-white rounded-md shadow-lg p-3 z-[99999]">
+    <div className="absolute bottom-12 left-2 w-64 bg-[#2C2C2C] text-white rounded-md shadow-lg p-3 z-[99999]">
       <h2 className="text-lg font-bold border-b border-gray-600 pb-2 mb-2">
         Apps
       </h2>

@@ -35,7 +35,7 @@ const actions = {
           title: action.payload.title,
           readOnly: action.payload.readOnly || false,
           content: action.payload.content || null,
-          icon: action.payload.icon || null,   // 👈 FIXED: icon always stored
+          icon: action.payload.icon || null,   
           minimized: false,
           maximized: false,
           zIndex: state.zIndexCounter + 1,

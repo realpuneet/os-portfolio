@@ -61,7 +61,7 @@ const Desktop = () => {
           title={win.title}
           readOnly={win.readOnly}
         >
-          <p className="text-white">
+          <p className="text-black">
             This is the <strong>{win.title}</strong> app content.
           </p>
         </Window>

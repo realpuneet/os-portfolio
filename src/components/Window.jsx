@@ -67,7 +67,7 @@ export default function Window({ id, title, readOnly, children }) {
       </div>
 
       {/* Content */}
-      <div className="p-4 bg-gray-700 min-h-[200px] overflow-auto">
+      <div className="p-4 bg-white min-h-screen overflow-auto">
         {readOnly ? (
           <div className="opacity-90 pointer-events-none select-none">
             {children}

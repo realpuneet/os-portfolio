@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { motion } from "motion/react";
-import puneetImage from '../assets/puneet.jpg'
+import puneetImage from "../assets/puneet.jpg"; // 👈 apni photo ka link dal dena
 
 export default function BootScreen({ onBootComplete }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onBootComplete();
-    }, 6500); // ~6.5 seconds boot time
+    }, 6500); // ~6.5 sec boot time
     return () => clearTimeout(timer);
   }, [onBootComplete]);
 
@@ -23,20 +23,34 @@ export default function BootScreen({ onBootComplete }) {
         <img
           src={puneetImage} // 👈 apni photo ka link dal dena
           alt="Puneet Yadav"
-          className="w-28 h-28 rounded-full mb-3 border-2 border-white shadow-lg"
+          className="w-24 h-24 rounded-full mb-3 border-2 border-white shadow-lg"
         />
-        {/* <h1 className="text-2xl font-bold">Puneet Yadav</h1> */}
       </motion.div>
 
-      {/* Portfolio OS Text */}
+      {/* Portfolio OS Text with Glow Effect */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 1, textShadow: "0px 0px 15px #00ffcc" }}
         transition={{ duration: 1.5, delay: 1 }}
-        className="text-3xl font-semibold mb-8"
+        className="text-3xl font-semibold mb-6"
       >
-      Puneet Yadav  
+        Puneet Yadav
       </motion.div>
+
+      {/* Glow Bar Animation */}
+      <div className="relative w-48 h-1 bg-gray-700 overflow-hidden rounded mb-8">
+        <motion.div
+          className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-green-400 to-transparent"
+          initial={{ x: "-100%" }}
+          animate={{ x: "200%" }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+            ease: "linear",
+            delay: 1.5
+          }}
+        />
+      </div>
 
       {/* Loading Spinner */}
       <motion.div
@@ -50,8 +64,7 @@ export default function BootScreen({ onBootComplete }) {
           delay: 2
         }}
       >
-        {/* Dots like Windows loading */}
-        {[...Array(8)].map((_,i) => (
+        {[...Array(5)].map((_, i) => (
           <motion.span
             key={i}
             className="absolute w-2 h-2 bg-green-500 rounded-full"

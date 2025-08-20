@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Wifi, Volume2, BatteryMedium, Globe } from "lucide-react"; // lucide-react icons use karenge
+import { Wifi, Volume2, BatteryMedium, Globe, Keyboard } from "lucide-react"; // lucide-react icons use karenge
 
 const TaskbarRight = () => {
   const [time, setTime] = useState(new Date());
@@ -19,6 +19,7 @@ const TaskbarRight = () => {
     <div className="ml-auto flex items-center space-x-4 text-white pr-3">
       {/* Icons */}
       <div className="flex items-center space-x-3">
+        <Keyboard className="w-5 h-5" />
         <Globe className="w-5 h-5" />
         <Wifi className="w-5 h-5" />
         <Volume2 className="w-5 h-5" />
