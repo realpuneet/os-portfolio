@@ -3,20 +3,14 @@ import { useWindows } from "../context/WindowContext";
 import Window from "./Window";
 import Taskbar from "./Taskbar";
 import DesktopWallpaper from "../assets/DesktopWallpaper.jpg";
+import { apps } from "../config/appConfig";
+import { i } from "motion/react-client";
 
 const Desktop = () => {
   const { state, dispatch } = useWindows();
 
   console.log("Window state: ", state.windows);
 
-  const apps = [
-    { id: "pc", title: "This PC", icon: "💻", readOnly: true },
-    { id: "about", title: "Notepad", icon: "📄", readOnly: true },
-    { id: "skills", title: "Settings", icon: "🛠️", readOnly: true },
-    { id: "contact", title: "Mail", icon: "✉️", readOnly: true },
-    { id: "calculator", title: "Calculator", icon: "🧮", readOnly: false },
-    { id: "game", title: "Games", icon: "🎮", readOnly: false },
-  ];
 
   const openApp = (app) => {
     dispatch({
@@ -25,6 +19,7 @@ const Desktop = () => {
         id: app.id,
         title: app.title,
         readOnly: app.readOnly,
+        icon: app.icon,
       },
     });
   };
@@ -44,7 +39,13 @@ const Desktop = () => {
             onDoubleClick={() => openApp(app)}
             className="flex flex-col items-center text-white cursor-pointer hover:scale-105 transition-transform"
           >
-            <div className="text-4xl drop-shadow-md">{app.icon}</div>
+            <div className=" h-[2rem] drop-shadow-md">
+              <img
+                className="h-full object-cover w-[2rem]"
+                src={app.icon}
+                alt=""
+              />
+            </div>
             <div className="text-sm mt-1 text-center drop-shadow-md">
               {app.title}
             </div>

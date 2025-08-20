@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, act } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 
 const initialState = {
   windows: [],
@@ -6,24 +6,44 @@ const initialState = {
 };
 
 const actions = {
-  // agar window already open hai z index update karo
-  OPEN_WINDOW: (state, action) => ({
-    ...state,
-    windows: [
-      ...state.windows,
-      {
-        id: action.payload.id,
-        title: action.payload.title,
-        readOnly: action.payload.readOnly || false,
-        content: action.payload.content,
-        icon: action.payload.icon,
-        minimized: false,
-        maximized: false,
-        zIndex: state.zIndexCounter + 1,
-      },
-    ],
-    zIndexCounter: state.zIndexCounter + 1,
-  }),
+  OPEN_WINDOW: (state, action) => {
+    // Check if window already exists
+    const existingWindow = state.windows.find(w => w.id === action.payload.id);
+
+    if (existingWindow) {
+      return {
+        ...state,
+        windows: state.windows.map(window =>
+          window.id === action.payload.id
+            ? { 
+                ...window, 
+                minimized: false,
+                zIndex: state.zIndexCounter + 1 
+              }
+            : window
+        ),
+        zIndexCounter: state.zIndexCounter + 1
+      };
+    }
+
+    return {
+      ...state,
+      windows: [
+        ...state.windows,
+        {
+          id: action.payload.id,
+          title: action.payload.title,
+          readOnly: action.payload.readOnly || false,
+          content: action.payload.content || null,
+          icon: action.payload.icon || null,   // 👈 FIXED: icon always stored
+          minimized: false,
+          maximized: false,
+          zIndex: state.zIndexCounter + 1,
+        },
+      ],
+      zIndexCounter: state.zIndexCounter + 1,
+    };
+  },
 
   CLOSE_WINDOW: (state, action) => ({
     ...state,
@@ -40,19 +60,24 @@ const actions = {
           }
         : win
     ),
+    zIndexCounter: state.zIndexCounter + 1,
   }),
 
   TOGGLE_MINIMIZE: (state, action) => ({
     ...state,
     windows: state.windows.map((w) =>
-      w.id === action.payload ? { ...w, minimized: !w.minimized } : w
+      w.id === action.payload 
+        ? { ...w, minimized: !w.minimized } 
+        : w
     ),
   }),
 
   TOGGLE_MAXIMIZE: (state, action) => ({
     ...state,
     windows: state.windows.map((w) =>
-      w.id === action.payload ? { ...w, maximized: !w.maximized } : w
+      w.id === action.payload 
+        ? { ...w, maximized: !w.maximized } 
+        : w
     ),
   }),
 };
