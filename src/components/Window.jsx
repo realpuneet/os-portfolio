@@ -23,13 +23,23 @@ export default function Window({ id, title, readOnly, children }) {
         x: 100,
         y: 100,
         width: 500,
-        height: 350,
+        height: 300,
       }}
-      minWidth={250}
-      minHeight={150}
+      minWidth={300}
+      minHeight={200}
       bounds="window"
       disableDragging={win.maximized}
       enableResizing={!win.maximized}
+      size={
+        win.maximized?
+        { width: "100%", height: "100%" } :
+        { width: win.width = 400, height: win.height=300 }
+      }
+      position={
+        win.maximized ?
+        { x: 0, y: 0 } :
+        { x: win.x = 150, y: win.y = 100 }
+      }
       style={{
         zIndex: win.zIndex,
         backgroundColor: "#1f2237",
